@@ -13,8 +13,8 @@ Este é um jogo da memória desenvolvido com Flutter. Ele oferece diferentes ní
 
 - Flutter
 - Dart
-- Hive (para armazenamento local)
-- Bloc (para gerenciamento de estado)
+- Hive
+- Bloc
 
 ----
 
@@ -33,5 +33,5 @@ This is a memory game developed with Flutter. It offers different levels of diff
 
 - Flutter
 - Dart
-- Hive (for local storage)
-- Bloc (for state management)
+- Hive
+- Bloc
