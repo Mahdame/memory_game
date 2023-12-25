@@ -17,8 +17,8 @@ class GameResultAdapter extends TypeAdapter<GameResult> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GameResult(
-      score: fields[0] as int,
-      elapsedTime: fields[1] as int,
+      score: fields[0] as int?,
+      elapsedTime: fields[1] as int?,
     );
   }
 
@@ -38,5 +38,7 @@ class GameResultAdapter extends TypeAdapter<GameResult> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is GameResultAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is GameResultAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

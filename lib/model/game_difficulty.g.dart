@@ -8,25 +8,35 @@ part of 'game_difficulty.dart';
 
 class GameDifficultyAdapter extends TypeAdapter<GameDifficulty> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
   GameDifficulty read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return GameDifficulty(
-      difficulty: fields[0] as Difficulty,
-    );
+    switch (reader.readByte()) {
+      case 0:
+        return GameDifficulty.easy;
+      case 1:
+        return GameDifficulty.medium;
+      case 2:
+        return GameDifficulty.hard;
+      default:
+        return GameDifficulty.easy;
+    }
   }
 
   @override
   void write(BinaryWriter writer, GameDifficulty obj) {
-    writer
-      ..writeByte(1)
-      ..writeByte(0)
-      ..write(obj.difficulty);
+    switch (obj) {
+      case GameDifficulty.easy:
+        writer.writeByte(0);
+        break;
+      case GameDifficulty.medium:
+        writer.writeByte(1);
+        break;
+      case GameDifficulty.hard:
+        writer.writeByte(2);
+        break;
+    }
   }
 
   @override
