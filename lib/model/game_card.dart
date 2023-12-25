@@ -1,9 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:memory_game/widgets/shiny_metal_card.dart';
 
 class GameCard extends StatefulWidget {
-  final String content; // Can be a path to an image or text
+  final String content;
   final bool isFlipped;
   final bool isMatched;
 
@@ -44,7 +45,6 @@ class _GameCardState extends State<GameCard> with SingleTickerProviderStateMixin
   @override
   void didUpdateWidget(GameCard oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // Flip or reverse the flip animation when the isFlipped state changes
     if (widget.isFlipped != oldWidget.isFlipped) {
       widget.isFlipped ? _controller.forward() : _controller.reverse();
     }
@@ -67,19 +67,20 @@ class _GameCardState extends State<GameCard> with SingleTickerProviderStateMixin
             ..setEntry(3, 2, 0.001) // Perspective
             ..rotateY(pi * _flipAnimation.value),
           alignment: Alignment.center,
-          child: _flipAnimation.value < 0.5 ? _buildFrontSide() : _buildBackSide(),
+          child: _flipAnimation.value < 0.5 ? _buildBackSide() : _buildFrontSide(),
         );
       },
     );
   }
 
-  Widget _buildFrontSide() {
-    return Container(
-      color: Colors.red,
-    ); // Design for the back of the card, maybe a plain color or a logo
+  Widget _buildBackSide() {
+    return const ShinyMetalCard();
   }
 
-  Widget _buildBackSide() {
-    return Image.asset(widget.content, fit: BoxFit.contain); // Display the image
+  Widget _buildFrontSide() {
+    return Image.asset(
+      widget.content,
+      fit: BoxFit.contain,
+    );
   }
 }
